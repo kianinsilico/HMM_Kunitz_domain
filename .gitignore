@@ -1,2 +1,5 @@
-# too created directories 
-**/tmp/
+
+data/raw_data/tmp/
+*.~lock.*
+.DS_Store
+*.swp
