@@ -1,0 +1,5 @@
+
+data/raw_data/tmp/
+*.~lock.*
+.DS_Store
+*.swp
