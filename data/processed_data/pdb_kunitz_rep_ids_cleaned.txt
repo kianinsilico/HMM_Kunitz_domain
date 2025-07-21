@@ -18,7 +18,6 @@
 1tfx:C
 1y62:A
 1yc0:I
-1yld:B
 1zr0:B
 3byb:A
 3fp7:J
