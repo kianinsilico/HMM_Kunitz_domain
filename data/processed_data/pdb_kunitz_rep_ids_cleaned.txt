@@ -1,10 +1,8 @@
-4bqd:A
 4iso:B
 4ntw:B
 4u30:X
 4u32:X
 5jb6:A
-5jbt:Y
 5m4v:A
 5nx1:C
 5nx3:D
