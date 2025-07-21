@@ -1,5 +1,9 @@
 
-data/raw_data/tmp/
 *.~lock.*
 .DS_Store
 *.swp
+
+# Intermediate or large files
+data/raw_data/tmp/
+raw_pdbs/
+tmalign_results/
