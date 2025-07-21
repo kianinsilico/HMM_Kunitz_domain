@@ -1,88 +1,73 @@
 # Hidden Markov Model for the Kunitz‑type Protease Inhibitor Domain
 
+
 This project aims to build a Hidden Markov Model (HMM) for the Kunitz-type (PF00014) protease inhibitor domain using structural data from the Protein Data Bank (PDB). The resulting model will be used to annotate homologous domains in external databases such as SwissProt.
 
----
+## Project Workflow Summary
 
-## Data Preprocessing Pipeline
+### 1. Data Acquisition and Preprocessing
 
-### PDB Query Details
+- Data was retrieved from RCSB PDB using a custom query:
+  - Pfam ID: PF00014
+  - Resolution ≤ 3 Å
+  - Sequence length between 45–80 residues
+- A custom report was downloaded from the RCSB website including the following fields:
+  - Entry ID
+  - Polymer Entity ID
+  - Sequence
+  - Annotation Identifier
+  - Chain ID
 
-The structural data was retrieved from the RCSB PDB using the following query constraints:
-
-- **Annotation Identifier**: PF00014 (Kunitz domain)
-- **Annotation Type**: Pfam
-- **Experimental Method**: All
-- **Resolution**: ≤ 3.0 Å
-- **Polymer Entity Sequence Length**: Between 45 and 80 residues
-
-A custom report was downloaded from the RCSB website including the following fields:
-- Entry ID
-- Polymer Entity ID
-- Sequence
-- Annotation Identifier
-- Chain ID
+- Extracted FASTA sequences from the CSV report using `scripts/01_csv_to_fasta.sh`
 
 
-This section documents the process used to retrieve, filter, and cluster structural domain sequences prior to model training.
+### 2. Sequence Clustering
 
-### 1. Convert PDB Custom Report to FASTA
+- Clustered with MMseqs2 using `scripts/02_mmseqs_cluster.sh`
+- Identity threshold: 90%, coverage: 80%
+- Output: representative sequences for further analysis
 
-Extract Kunitz-domain sequences from the custom report downloaded from the RCSB PDB.
+### 3. ID Extraction for Structural Search
 
-```bash
-./scripts/01_csv_to_fasta.sh \
-  data/raw_data/rcsb_pdb_custom_report_20250518061229.csv \
-  data/raw_data/pdb_kunitz.fasta
+- Used `scripts/03_extract_ids.sh` to format IDs for PDBeFold
+
+### 4. Structural Filtering
+
+- Extracted desired chains from downloaded PDB files using:
+  ```
+  ./scripts/04_extract_chains.sh <cleaned_id_list> <raw_pdb_dir> <output_dir>
+  ```
+- Manual QC in AliView and ChimeraX identified and excluded:
+  - `1yld_B` (truncated structure)
+  - `5jbt_Y` (structurally divergent)
+
+### 5. Structural Alignment and Quality Assessment
+
+- Ran all-vs-all TM-align using `scripts/05_run_tmalign.sh`
+- Parsed and visualized results using `scripts/06_parse_tmalign.py`
+  - Outputs: RMSD and TM-score matrices, rankings, heatmaps
+  - Top reference: `1f5r_I`
+
+### 6. Superposition
+
+- Structures were aligned in ChimeraX using Matchmaker
+- Alignment centered on `1f5r:I`
+- Outputs include `.cxs` session file and figure
+
+## Directory Structure
+
+```
+scripts/                 # Bash and Python scripts for all steps
+data/
+├── raw_data/            # Raw FASTA, cluster, and CSV input
+├── raw_pdbs/            # Downloaded full PDBs
+├── pdbs/                # Cleaned single-chain PDBs
+├── processed_data/      # Cleaned ID lists and alignment results
+visualization/           # TM-align outputs and plots
 ```
 
-- Filters for entries with Pfam ID `PF00014`
-- Produces FASTA entries with format: `>PDBID_CHAIN`
+## Next Steps
 
----
-
-### 2. Remove Redundancy with MMseqs2
-
-Clusters the sequences to remove redundancy using a 90% identity threshold and 80% coverage.
-
-```bash
-./scripts/02_mmseqs_cluster.sh \
-  data/raw_data/pdb_kunitz.fasta \
-  data/raw_data/clusterRes \
-  data/raw_data/tmp
-```
-
-- Outputs:
-  - `clusterRes_rep_seq.fasta`: representative sequences
-  - `clusterRes_cluster.tsv`: cluster mapping
-  - `clusterRes_all_seqs.fasta`: all clustered sequences
-
----
-
-### 3. Extract PDB IDs for PDBeFold
-
-Formats representative PDB IDs to the `PDBID:CHAIN` format.
-
-```bash
-./scripts/03_extract_ids.sh \
-  data/raw_data/clusterRes_rep_seq.fasta \
-  data/raw_data/pdb_kunitz_rep_ids.txt
-```
-
-- Output example: `1ABC:A`, `2XYZ:B`
-
----
-
-## File Overview
-
-| File                                      | Description                                |
-|-------------------------------------------|--------------------------------------------|
-| `rcsb_pdb_custom_report_20250518061229.csv` | Raw CSV from RCSB with PF00014 structures |
-| `pdb_kunitz.fasta`                        | Filtered FASTA containing all sequences    |
-| `clusterRes_rep_seq.fasta`                | Clustered representative sequences         |
-| `clusterRes_cluster.tsv`                  | Cluster info from MMseqs2                  |
-| `pdb_kunitz_rep_ids.txt`                  | List of rep IDs in `PDBID:CHAIN` format    |
-
----
-
-ℹ️ *Next step: Build and train the HMM model using the representative sequences.*
+- Build multiple sequence alignments from structurally curated dataset
+- Generate HMM profiles using `hmmbuild`
+- Validate with SwissProt homologs
