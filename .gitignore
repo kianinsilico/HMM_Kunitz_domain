@@ -1,4 +1,4 @@
 # Intermediate or large files
-raw_data/tmp/
+raw_data/tmp/*
 raw_pdbs/
 tmalign_results/
