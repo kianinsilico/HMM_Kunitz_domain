@@ -63,7 +63,7 @@ data/
 ├── raw_pdbs/            # Downloaded full PDBs
 ├── pdbs/                # Cleaned single-chain PDBs
 ├── processed_data/      # Cleaned ID lists and alignment results
-visualization/           # TM-align outputs and plots
+├── visualization/       # TM-align and ChimeraX outputs and plots
 ```
 
 ## Next Steps
