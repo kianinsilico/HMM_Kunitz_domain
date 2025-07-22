@@ -1,0 +1,48 @@
+# Load reference
+open ../data/pdbs/1f5r_I.pdb
+rename #1 1f5r_I
+
+# Load all other structures
+open ../data/pdbs/1aap_A.pdb
+open ../data/pdbs/1bun_B.pdb
+open ../data/pdbs/1dtx_A.pdb
+open ../data/pdbs/1fak_I.pdb
+open ../data/pdbs/1knt_A.pdb
+open ../data/pdbs/1tfx_C.pdb
+open ../data/pdbs/1y62_A.pdb
+open ../data/pdbs/1yc0_I.pdb
+open ../data/pdbs/1zr0_B.pdb
+open ../data/pdbs/3byb_A.pdb
+open ../data/pdbs/3fp7_J.pdb
+open ../data/pdbs/3m7q_B.pdb
+open ../data/pdbs/4iso_B.pdb
+open ../data/pdbs/4ntw_B.pdb
+open ../data/pdbs/4u30_X.pdb
+open ../data/pdbs/4u32_X.pdb
+open ../data/pdbs/5jb6_A.pdb
+open ../data/pdbs/5m4v_A.pdb
+open ../data/pdbs/5nx1_C.pdb
+open ../data/pdbs/5nx3_D.pdb
+open ../data/pdbs/6bx8_B.pdb
+open ../data/pdbs/6kzf_A.pdb
+open ../data/pdbs/6yhy_A.pdb
+
+# Align all to reference (1f5r_I)
+matchmaker #2-24 to #1
+
+# Adjust view and save image
+graphics bg white
+windowsize 1800 1400
+save ../data/visualization/kunitz_superposition.png format png supersample 3 transparentBackground true
+
+# Record and encode a 360° spin around the Y-axis
+view orient
+hide atoms
+movie record supersample 3 size 800,600
+turn axis y angle 2 frames 180
+wait 180
+movie encode output ../data/visualization/kunitz_spin.mp4
+
+
+# Save ChimeraX session
+save ../data/visualization/kunitz_superposition.cxs
