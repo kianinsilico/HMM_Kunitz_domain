@@ -33,7 +33,16 @@ matchmaker #2-24 to #1
 # Adjust view and save image
 graphics bg white
 windowsize 1800 1400
-copy file ../data/visualization/kunitz_superposition.png supersample 3
+save ../data/visualization/kunitz_superposition.png format png supersample 3 transparentBackground true
+
+# Record and encode a 360° spin around the Y-axis
+view orient
+hide atoms
+movie record supersample 3 size 800,600
+turn axis y angle 2 frames 180
+wait 180
+movie encode output ../data/visualization/kunitz_spin.mp4
+
 
 # Save ChimeraX session
 save ../data/visualization/kunitz_superposition.cxs
