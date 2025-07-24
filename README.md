@@ -25,13 +25,34 @@ This project addresses the identification of **Kunitz-type serine protease inhib
 ## 🗂️ Repository Structure
 
 ```bash
-├── data/                         # All datasets (.fasta, .class)
-├── alignments/                  # Cleaned PDBeFold alignments
-├── results/                     # Evaluation output (heatmaps, matrices)
-├── scripts/                     # Bash and Python scripts for processing
-├── figures/                     # Structural comparison figures
-├── docs/                        # Manuscript or report drafts
-├── README.md
+├── data/                         # All datasets and processed data
+│   ├── datasets/                 # FASTA files, classification data, evaluation results
+│   ├── pdbs/                     # Cleaned single-chain PDB structures
+│   ├── processed_data/           # Intermediate processing results
+│   ├── raw_data/                 # Original input data
+│   ├── raw_pdbs/                 # Downloaded full PDB structures
+│   ├── tmalign_results/          # Pairwise alignment outputs
+│   ├── visualization/            # Plots and visual analysis results
+│   └── consistency_check.txt     # Data validation results
+├── scripts/                      # Processing pipeline scripts
+│   ├── 01_csv_to_fasta.sh        # Convert CSV to FASTA format
+│   ├── 02_mmseqs_cluster.sh      # Sequence clustering with MMseqs2
+│   ├── 03_extract_ids.sh         # ID formatting for PDBeFold
+│   ├── 04_extract_chains.sh      # PDB chain extraction
+│   ├── 05_run_tmalign.sh         # Structural alignment pipeline
+│   ├── 06_parse_tmalign.py       # TM-align results parser
+│   ├── 07_kunitz_superposition.cxc # ChimeraX superposition script
+│   ├── 08_plot_pdbefold_matrices.py # Visualization scripts
+│   ├── 09_build_hmm.sh           # HMM model construction
+│   ├── 11_consistency_check.sh   # Data validation
+│   ├── 12_kunitz_hmm_validator.sh # Enhanced HMM evaluation tool
+├── docs/                         # Documentation and visuals
+│   ├── .repo_visulas/            # Repository graphics and banner
+│   └── results/                  # Analysis results and reports
+├── environment_full.yml          # Conda environment specification
+├── LICENCE                       # License file
+├── LICENCE-DATA.txt             # Data license information
+└── README.md                     # Project documentation
 ```
 ## Project Workflow Summary
 
