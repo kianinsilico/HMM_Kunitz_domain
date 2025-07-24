@@ -1,24 +1,51 @@
-Custom Academic Code License v1.0
+Educational Use License — Kunitz HMM Classification Project
 
-Copyright (c) 2025 Kianoush Keshani
+Authors:
+Kianoush Keshani
 
-Permission is hereby granted, free of charge, to use, copy, modify, and share this Software (code and scripts) for non-commercial academic, research, and educational purposes, subject to the following conditions:
+Year: 2025
 
-1. Non-Commercial Use  
-   The Software may not be used for any commercial purpose without explicit written permission from the copyright holder.
+License: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 
-2. Open Source Distribution  
-   Any redistribution of modified or unmodified versions of the Software must retain this license and remain open source and publicly accessible. Closed-source redistribution is prohibited.
+---
 
-3. Citation Required  
-   Any use, redistribution, or derivative work based on this Software must include the following citation:
+Citation Requirement
 
-   > Kianoush Keshani. "Hidden Markov Model for the Kunitz-type protease inhibitor domain". GitHub Repository, https://github.com/kianinsilico/Lab1Project, 2025.
+If you use this project, in whole or in part, in your academic work (e.g., publications, theses, presentations, course materials, or derivative educational materials), you must cite the authors appropriately:
 
-4. No Warranty  
-   This Software is provided "as is", without any warranty or liability.
+> Keshani K.  
+> *Kunitz HMM Classification Project: HMM-based classification and evaluation pipeline for Kunitz domain proteins*.  
+> University of Bologna, 2025.  
+> GitHub: https://github.com/kianinsilico/labexam
 
-5. Collaboration Welcome  
-   Contributions via pull requests and forks are encouraged, provided they maintain the non-commercial and open-access spirit of the project and preserve proper attribution.
+If you are unsure how to cite this work, please contact the authors via GitHub Issues.
 
-By using this Software, you agree to these terms.
+---
+
+Summary of License Terms
+
+This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+You are free to:
+
+- Share — copy and redistribute the material in any medium or format
+- Adapt — remix, transform, and build upon the material
+
+Under the following terms:
+
+- Attribution — You must give appropriate credit, including the citation above.
+- NonCommercial — You may not use the material for commercial purposes.
+- ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license.
+
+No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything this license permits.
+
+---
+
+Academic Integrity
+
+This project was completed as a graded assignment at the University of Bologna. Reposting the repository, copying content (even partially), or claiming authorship of this work without permission and attribution constitutes academic dishonesty and a violation of both licensing and university policy.
+
+Violations will be reported to GitHub and the University of Bologna as appropriate.
+
+To view a copy of this license, visit:  
+https://creativecommons.org/licenses/by-nc-sa/4.0/

@@ -1,24 +1,63 @@
-Custom Academic Data License v1.0
+Educational Use License — Kunitz HMM Classification Data
 
-Copyright (c) 2025 Kianoush Keshani
+Authors:
+Kianoush Keshani
 
-The datasets included in this repository (e.g., files in ./data/ and its subdirectories) are licensed for academic, non-commercial research and educational use only, under the following terms:
+Year: 2025
 
-1. Non-Commercial Use  
-   The Data may not be used in any commercial product, service, or study without explicit permission.
+License: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 
-2. Redistribution  
-   You may not redistribute the Data in any form, modified or unmodified, without citing the original source and preserving this license. Redistribution for commercial purposes is strictly prohibited.
+---
 
-3. Citation Required  
-   Any publication or project using these data must include the following citation:
+Data Citation Requirement
 
-   > Kianoush Keshani. "Hidden Markov Model for the Kunitz-type protease inhibitor domain". GitHub Repository, https://github.com/kianinsilico/Lab1Project, 2025.
+If you use these datasets, in whole or in part, in your academic work (e.g., publications, theses, presentations, course materials, or derivative educational materials), you must cite the dataset appropriately:
 
-4. Attribution for Derived Data  
-   Any derivative datasets generated using these files must include a clear attribution to the original data source and remain under a compatible academic, non-commercial license.
+> Keshani K.  
+> *Kunitz HMM Classification Dataset: Curated Kunitz domain protein sequences and HMM evaluation data*.  
+> University of Bologna, 2025.  
+> GitHub: https://github.com/kianinsilico/labexam
 
-5. No Warranty  
-   The Data is provided "as is" with no warranty of accuracy or fitness for any purpose.
+If you are unsure how to cite this dataset, please contact the authors via GitHub Issues.
 
-By accessing or using this Data, you agree to these terms.
+---
+
+Summary of License Terms
+
+This dataset is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+You are free to:
+
+- Share — copy and redistribute the dataset in any medium or format
+- Adapt — remix, transform, and build upon the dataset
+
+Under the following terms:
+
+- Attribution — You must give appropriate credit, including the citation above.
+- NonCommercial — You may not use the dataset for commercial purposes.
+- ShareAlike — If you remix, transform, or build upon the dataset, you must distribute your contributions under the same license.
+
+No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything this license permits.
+
+---
+
+Data Usage Notes
+
+This dataset contains:
+- Kunitz domain protein sequences from various sources
+- HMM profiles and evaluation results
+- Cross-validation performance metrics
+- Structural alignment data
+
+Please ensure compliance with original data source licenses where applicable.
+
+---
+
+Academic Integrity
+
+This dataset was compiled as part of a graded assignment at the University of Bologna. Reposting the dataset, using data (even partially), or claiming authorship of this work without permission and attribution constitutes academic dishonesty and a violation of both licensing and university policy.
+
+Violations will be reported to GitHub and the University of Bologna as appropriate.
+
+To view a copy of this license, visit:  
+https://creativecommons.org/licenses/by-nc-sa/4.0/

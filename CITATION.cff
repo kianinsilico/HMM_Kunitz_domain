@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Kunitz HMM Classification Project"
+abstract: "HMM-based classification and evaluation pipeline for Kunitz domain proteins using cross-validation and performance assessment tools."
+authors:
+  - family-names: "Keshani"
+    given-names: "Kianoush"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+    affiliation: "University of Bologna"
+version: "1.0.0"
+date-released: 2025-01-24
+url: "https://github.com/kianinsilico/labexam"
+repository-code: "https://github.com/kianinsilico/labexam"
+license: "CC-BY-NC-SA-4.0"
+keywords:
+  - "bioinformatics"
+  - "protein-classification"
+  - "hmm"
+  - "kunitz-domain"
+  - "cross-validation"
+  - "machine-learning"
+  - "structural-biology"
+  - "computational-biology"
+preferred-citation:
+  type: software
+  title: "Kunitz HMM Classification Project: HMM-based classification and evaluation pipeline for Kunitz domain proteins"
+  authors:
+    - family-names: "Keshani"
+      given-names: "Kianoush"
+      orcid: "https://orcid.org/0000-0000-0000-0000"
+      affiliation: "University of Bologna"
+  year: 2025
+  url: "https://github.com/kianinsilico/labexam"
+  notes: "Laboratory examination project for Laboratory of Bioinformatics 1 course"
