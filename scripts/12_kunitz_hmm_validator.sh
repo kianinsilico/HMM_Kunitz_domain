@@ -2,12 +2,18 @@
 
 # Default threshold value
 THRESHOLD="1e-5"
+# Default Python scripts path (current directory)
+PYTHON_SCRIPTS_PATH="."
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
         -t|--threshold)
             THRESHOLD="$2"
+            shift 2
+            ;;
+        -p|--python-path)
+            PYTHON_SCRIPTS_PATH="$2"
             shift 2
             ;;
         -h|--help)
@@ -34,12 +40,14 @@ while [[ $# -gt 0 ]]; do
             echo ""
             echo "OPTIONS:"
             echo "  -t, --threshold THRESHOLD    Set E-value threshold for performance evaluation (default: 1e-5)"
+            echo "  -p, --python-path PATH       Path to directory containing Python scripts (default: current directory)"
             echo "  -h, --help                   Show this help message"
             echo ""
             echo "EXAMPLES:"
             echo "  $0 human_kunitz.fasta nothuman_kunitz.fasta"
             echo "  $0 -t 1e-6 human_kunitz.fasta nothuman_kunitz.fasta"
             echo "  $0 --threshold 1e-4 *.fasta"
+            echo "  $0 -p /path/to/scripts -t 1e-6 human_kunitz.fasta nothuman_kunitz.fasta"
             echo ""
             echo "REQUIREMENTS:"
             echo "  - BLAST+ tools (makeblastdb, blastp)"
@@ -73,6 +81,7 @@ fi
 echo "[INFO] Starting 2-fold cross-validation HMM model testing..."
 echo "[INFO] Input files: $@"
 echo "[INFO] Using E-value threshold: $THRESHOLD"
+echo "[INFO] Python scripts path: $PYTHON_SCRIPTS_PATH"
 
 echo "[STEP 1] Create combined dataset from input files..."
 cat "$@" > all_kunitz_uniprot.fasta
@@ -90,10 +99,10 @@ grep ">" all_kunitz_uniprot.fasta | cut -d "|" -f 2 > all_kunitz.id
 comm -23 <(sort all_kunitz.id) <(sort to_remove.ids) > to_keep.ids
 
 echo "[STEP 5] Prepare sequences using get_seq.py..."
-python3 get_seq.py to_keep.ids all_kunitz_uniprot.fasta ok_kunitz.fasta
+python3 "$PYTHON_SCRIPTS_PATH/get_seq.py" to_keep.ids all_kunitz_uniprot.fasta ok_kunitz.fasta
 grep ">" uniprot_sprot.fasta | cut -d "|" -f 2 > sp.id
 comm -23 <(sort sp.id) <(sort all_kunitz.id) > sp_negs.ids
-python3 get_seq.py sp_negs.ids uniprot_sprot.fasta sp_negs.fasta
+python3 "$PYTHON_SCRIPTS_PATH/get_seq.py" sp_negs.ids uniprot_sprot.fasta sp_negs.fasta
 
 echo "[STEP 6] Random split into 2 folds..."
 sort -R sp_negs.ids > random_sp_negs.ids
@@ -104,10 +113,10 @@ tail -n 184 random_ok_kunitz.ids > pos_2.ids
 head -n 286417 random_sp_negs.ids > neg_1.ids
 tail -n 286417 random_sp_negs.ids > neg_2.ids
 
-python3 get_seq.py pos_1.ids uniprot_sprot.fasta pos_1.fasta
-python3 get_seq.py pos_2.ids uniprot_sprot.fasta pos_2.fasta
-python3 get_seq.py neg_1.ids uniprot_sprot.fasta neg_1.fasta
-python3 get_seq.py neg_2.ids uniprot_sprot.fasta neg_2.fasta
+python3 "$PYTHON_SCRIPTS_PATH/get_seq.py" pos_1.ids uniprot_sprot.fasta pos_1.fasta
+python3 "$PYTHON_SCRIPTS_PATH/get_seq.py" pos_2.ids uniprot_sprot.fasta pos_2.fasta
+python3 "$PYTHON_SCRIPTS_PATH/get_seq.py" neg_1.ids uniprot_sprot.fasta neg_1.fasta
+python3 "$PYTHON_SCRIPTS_PATH/get_seq.py" neg_2.ids uniprot_sprot.fasta neg_2.fasta
 
 echo "[STEP 7] Run hmmsearch against HMM..."
 hmmsearch -Z 1000 --max --tblout pos_1.out kunitz_model.hmm pos_1.fasta
@@ -128,13 +137,13 @@ cat pos_1.class neg_1.class > set_1.class
 cat pos_2.class neg_2.class > set_2.class
 
 echo "[STEP 9] Run performance.py with threshold = $THRESHOLD..."
-python3 performance.py set_1.class $THRESHOLD > results_set_1.txt
-python3 performance.py set_2.class $THRESHOLD > results_set_2.txt
+python3 "$PYTHON_SCRIPTS_PATH/performance.py" set_1.class $THRESHOLD > results_set_1.txt
+python3 "$PYTHON_SCRIPTS_PATH/performance.py" set_2.class $THRESHOLD > results_set_2.txt
 
 echo "[STEP 10] Sweep multiple thresholds..."
 for i in $(seq 1 10); do
-  python3 performance.py set_1.class 1e-$i
+  python3 "$PYTHON_SCRIPTS_PATH/performance.py" set_1.class 1e-$i
 done > diff_threshold_set1.txt
 for i in $(seq 1 10); do
-  python3 performance.py set_2.class 1e-$i
+  python3 "$PYTHON_SCRIPTS_PATH/performance.py" set_2.class 1e-$i
 done > diff_threshold_set2.txt
