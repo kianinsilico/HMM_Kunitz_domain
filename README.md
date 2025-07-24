@@ -1,6 +1,6 @@
-<div align="center">
-
 # HMM-Based Detection of Kunitz Domains from Structure-Derived Alignments
+
+<div align="center">
 
   <img src="docs/.repo_visulas/graphical_abstract.png" alt="Kunitz Domain HMM Classification Project Banner" width="100%"/>
 
