@@ -1,7 +1,8 @@
 <div align="center">
-  <img src="docs/.repo_visulas/graphical_abstract.png" alt="Kunitz Domain HMM Classification Project Banner" width="100%"/>
-  
+
 # Kunitz Domain HMM Classification Project
+
+  <img src="docs/.repo_visulas/graphical_abstract.png" alt="Kunitz Domain HMM Classification Project Banner" width="100%"/>
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
