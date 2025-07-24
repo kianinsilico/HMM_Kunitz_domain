@@ -1,8 +1,32 @@
-# Hidden Markov Model for the Kunitz‑type Protease Inhibitor Domain
+# Kunitz Domain HMM Classification Project
 
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Bioinformatics Lab 1](https://img.shields.io/badge/lab-Bioinformatics%201-blueviolet)](https://github.com/)
+[![HMMER](https://img.shields.io/badge/tool-HMMER-yellow)](http://hmmer.org/)
+[![Python](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/)
 
-This project aims to build a Hidden Markov Model (HMM) for the Kunitz-type (PF00014) protease inhibitor domain using structural data from the Protein Data Bank (PDB). The resulting model will be used to annotate homologous domains in external databases such as SwissProt.
+This repository contains the complete pipeline and materials for building, evaluating, and validating a profile HMM designed to detect Kunitz-type domains in protein sequences, as part of the final assessment for **Laboratory of Bioinformatics 1 @ University of Bologna**.
 
+---
+
+## Project Overview
+
+This project addresses the identification of **Kunitz-type serine protease inhibitors** through a **custom-trained HMM**, evaluated for performance on diverse validation datasets. The model was built from structure-based alignments, evaluated using strict quality metrics, and benchmarked against known positive and negative datasets.
+
+---
+
+## 🗂️ Repository Structure
+
+```bash
+├── data/                         # All datasets (.fasta, .class)
+├── alignments/                  # Cleaned PDBeFold alignments
+├── results/                     # Evaluation output (heatmaps, matrices)
+├── scripts/                     # Bash and Python scripts for processing
+├── figures/                     # Structural comparison figures
+├── docs/                        # Manuscript or report drafts
+├── README.md
+```
 ## Project Workflow Summary
 
 ### 1. Data Acquisition and Preprocessing
@@ -54,20 +78,27 @@ This project aims to build a Hidden Markov Model (HMM) for the Kunitz-type (PF00
 - Alignment centered on `1f5r:I`
 - Outputs include `.cxs` session file and figure
 
-## Directory Structure
-
+### 7: HMM Construction
+```bash
+hmmbuild kunitz_model.hmm pdb_kunitz_PDBeFold_alignment_clean.fasta.ali
 ```
-scripts/                 # Bash and Python scripts for all steps
-data/
-├── raw_data/            # Raw FASTA, cluster, and CSV input
-├── raw_pdbs/            # Downloaded full PDBs
-├── pdbs/                # Cleaned single-chain PDBs
-├── processed_data/      # Cleaned ID lists and alignment results
-├── visualization/       # TM-align and ChimeraX outputs and plots
-```
+### 8: HMM Evaluation
+Validation datasets used:
 
-## Next Steps
+- human_kunitz.fasta
+- human_notkunitz.fasta
+- nothuman_kunitz.fasta
+- uniprot_sprot.fasta (background)
 
-- Build multiple sequence alignments from structurally curated dataset
-- Generate HMM profiles using `hmmbuild`
-- Validate with SwissProt homologs
+These datasets were classified using hmmsearch, and the results were parsed to compute performance metrics via a custom Python script performance.py.
+
+## 📈 Performance Results
+| UniProt ID | Length | \# Domains (PF00014) | Domain Position(s) | Comments               |
+|------------|--------|----------------------|--------------------|------------------------|
+| A0A1Q1NL17 | 101    | 1                    | 32--88             | Short sequence         |
+| O62247     | 202    | 1                    | 138--184           | Domain near C-terminal |
+| Q8WPG5     | 134    | 2                    | 17--69, 83--129    | Tandem domains         |
+| D3GGZ8     | 195    | 1                    | 120--190           | Domain near C-terminal |
+
+> Best result observed with E-value threshold = 1e-06 using full sequence mode:
+MCC = 0.9945, TPR = 1.0, PPV = 0.989
