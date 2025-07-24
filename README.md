@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Bioinformatics Lab 1](https://img.shields.io/badge/lab-Bioinformatics%201-blueviolet)](https://github.com/)
 [![HMMER](https://img.shields.io/badge/tool-HMMER-yellow)](http://hmmer.org/)
-[![Python](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/python-3.13+-blue)](https://www.python.org/)
 
 <div align="center">
 
@@ -109,15 +109,51 @@ This project addresses the identification of **Kunitz-type serine protease inhib
 ```bash
 hmmbuild kunitz_model.hmm pdb_kunitz_PDBeFold_alignment_clean.fasta.ali
 ```
-### 8: HMM Evaluation
-Validation datasets used:
 
-- human_kunitz.fasta
-- human_notkunitz.fasta
-- nothuman_kunitz.fasta
-- uniprot_sprot.fasta (background)
+### 8: HMM Evaluation & Cross-Validation
 
-These datasets were classified using hmmsearch, and the results were parsed to compute performance metrics via a custom Python script performance.py.
+The final HMM model undergoes rigorous evaluation using a 2-fold cross-validation approach to assess its performance on independent datasets. This evaluation process ensures robust performance metrics and validates the model's ability to correctly identify Kunitz-type domains while minimizing false positives.
+
+**Evaluation Methodology:**
+- **Cross-validation design:** 2-fold splitting to maximize dataset utilization
+- **Overlap removal:** Training sequences are filtered out to prevent data leakage
+- **Performance metrics:** Matthews Correlation Coefficient (MCC), True Positive Rate (TPR), and Positive Predictive Value (PPV)
+- **Threshold optimization:** Multiple E-value thresholds tested to find optimal cutoffs
+
+**Validation Datasets:**
+- `human_kunitz.fasta` - Human Kunitz domain sequences (positive set)
+- `human_notkunitz.fasta` - Human non-Kunitz sequences (negative control)
+- `nothuman_kunitz.fasta` - Non-human Kunitz sequences (diversity test)
+- `uniprot_sprot.fasta` - SwissProt background sequences (large negative set)
+
+**Analysis Pipeline:**
+1. Combine input datasets and remove training sequence overlaps
+2. Random split into balanced positive/negative folds
+3. Execute hmmsearch against the trained HMM model
+4. Parse results and calculate classification performance
+5. Generate comprehensive performance reports and threshold analysis
+
+---
+
+## 🛠️ Environment Setup
+
+The project includes a streamlined conda environment with only essential bioinformatics tools:
+
+```bash
+# Create the environment
+conda env create -f environment_full.yml
+
+# Activate the environment
+conda activate kunitz
+```
+
+**Key dependencies:**
+- **Python 3.13** with scientific computing stack (NumPy, Pandas, SciPy)
+- **Bioinformatics tools:** BLAST, HMMER, MMseqs2, MUSCLE, TM-align
+- **Analysis tools:** BioPython, Matplotlib, Seaborn
+- **Sequence utilities:** SeqKit, PDB-tools
+
+---
 
 ## 📈 Performance Results
 | UniProt ID | Length | \# Domains (PF00014) | Domain Position(s) | Comments               |
