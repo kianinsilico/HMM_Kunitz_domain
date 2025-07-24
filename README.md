@@ -1,10 +1,14 @@
 # HMM-Based Detection of Kunitz Domains from Structure-Derived Alignments
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Bioinformatics Lab 1](https://img.shields.io/badge/lab-Bioinformatics%201-blueviolet)](https://github.com/)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/license-CC--BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![Citation: CFF](https://img.shields.io/badge/citation-CFF-blue.svg)](CITATION.cff)
+[![University of Bologna](https://img.shields.io/badge/university-Bologna-red.svg)](https://www.unibo.it/)
+[![Bioinformatics Lab 1](https://img.shields.io/badge/course-Bioinformatics%20Lab%201-blueviolet)](https://github.com/)
 [![HMMER](https://img.shields.io/badge/tool-HMMER-yellow)](http://hmmer.org/)
-[![Python](https://img.shields.io/badge/python-3.13+-blue)](https://www.python.org/)
+[![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue)](https://www.python.org/)
+[![TM-align](https://img.shields.io/badge/tool-TM--align-orange)](https://zhanggroup.org/TM-align/)
+[![MMseqs2](https://img.shields.io/badge/tool-MMseqs2-green)](https://github.com/soedinglab/MMseqs2)
+[![Project Status](https://img.shields.io/badge/status-complete-success)](https://github.com/)
 
 <div align="center">
 
