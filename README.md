@@ -1,14 +1,14 @@
 # HMM-Based Detection of Kunitz Domains from Structure-Derived Alignments
 
-<div align="center">
-
-  <img src="docs/.repo_visulas/graphical_abstract.png" alt="Kunitz Domain HMM Classification Project Banner" width="100%"/>
-
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Bioinformatics Lab 1](https://img.shields.io/badge/lab-Bioinformatics%201-blueviolet)](https://github.com/)
 [![HMMER](https://img.shields.io/badge/tool-HMMER-yellow)](http://hmmer.org/)
 [![Python](https://img.shields.io/badge/python-3.10+-blue)](https://www.python.org/)
+
+<div align="center">
+
+  <img src="docs/.repo_visulas/graphical_abstract.png" alt="Kunitz Domain HMM Classification Project Banner" width="100%"/>
 
 </div>
 
